@@ -1,0 +1,1039 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+   <title>KUPCO | Order</title>
+
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="../Content/general/fav/apple-touch-icon.png" />
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="../Content/general/fav/favicon-32x32.png" />
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="../Content/general/fav/favicon-16x16.png" />
+    <!-- <link rel="manifest" href="../Content/general/fav/site.webmanifest" /> -->
+
+    <link id="css-ltr" rel="stylesheet" href="../Content/general/css/bootstrap.min.css" />
+    <!-- Keep linkBootstrap for dynamic language -->
+    <link rel="stylesheet" href="../index.html" id="linkBootstrap">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../Content/general/css/site.css%3Fv=4.1.css" />
+
+    <style>
+        .payment-container {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+            .payment-container header {
+                margin-bottom: 40px;
+                text-align: center;
+            }
+
+                .payment-container header h2 {
+                    font-size: 24px;
+                    line-height: 24px;
+                }
+
+                .payment-container header h3 {
+                    font-size: 16px;
+                    font-weight: 300;
+                }
+
+            .payment-container .payment-item {
+                background: linear-gradient(#fbfbfb 0%, #f0f0f0 100%);
+                border: 1px solid #dcdcdc;
+                border-radius: 5px;
+                display: block;
+                margin: 0 0 20px;
+                padding: 8px;
+                width: 100%;
+            }
+
+                .payment-container .payment-item:after {
+                    clear: both;
+                    content: "";
+                    display: table;
+                }
+
+                .payment-container .payment-item .item-title,
+                .payment-container .payment-item .item-options {
+                    display: inline-block;
+                    margin-right: -4px;
+                    position: relative;
+                    vertical-align: top;
+                }
+
+                .payment-container .payment-item .item-title {
+                    font-weight: 600;
+                    width: 40%;
+                }
+
+                    .payment-container .payment-item .item-title span {
+                        color: #d0021b;
+                    }
+
+                .payment-container .payment-item .item-options {
+                    width: 60%;
+                }
+
+                    .payment-container .payment-item .item-options .selection {
+                        cursor: pointer;
+                        display: block;
+                        position: relative;
+                        width: 100%;
+                    }
+
+                        .payment-container .payment-item .item-options .selection .check,
+                        .payment-container .payment-item .item-options .selection label {
+                            transition: 250ms ease all;
+                        }
+
+                        .payment-container .payment-item .item-options .selection .check {
+                            background: #fff;
+                            border: 1px solid #d2d2d2;
+                            border-radius: 100px;
+                            content: "";
+                            height: 14px;
+                            left: 10px;
+                            position: absolute;
+                            top: 18px;
+                            width: 14px;
+                        }
+
+                        .payment-container .payment-item .item-options .selection label {
+                            background: #f7f7f7;
+                            border: 1px solid #d2d2d2;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            display: block;
+                            margin: 0 0 10px 0;
+                            padding: 10px 10px 10px 30px;
+                            position: relative;
+                            width: 100%;
+                        }
+
+                            .payment-container .payment-item .item-options .selection label:hover {
+                                background: #fff;
+                            }
+
+                        .payment-container .payment-item .item-options .selection span {
+                            float: right;
+                        }
+
+                    .payment-container .payment-item .item-options input {
+                        display: none;
+                    }
+
+                        .payment-container .payment-item .item-options input.form-control {
+                            display: block;
+                        }
+
+                        .payment-container
+                        .payment-item
+                        .item-options
+                        input[type="radio"]:checked ~ .check {
+                            border-color: #000;
+                        }
+
+                            .payment-container
+                            .payment-item
+                            .item-options
+                            input[type="radio"]:checked ~ .check:before {
+                                background: #000;
+                                border-radius: 100px;
+                                content: "";
+                                height: 6px;
+                                left: 3px;
+                                position: absolute;
+                                top: 3px;
+                                width: 6px;
+                            }
+
+                        .payment-container
+                        .payment-item
+                        .item-options
+                        input[type="radio"]:checked ~ label {
+                            background: linear-gradient(#8e8e8e 0%, #555 100%);
+                            border-color: #000;
+                            color: #fff;
+                        }
+
+        @media (max-width: 600px) {
+            .payment-container .payment-item .item-title,
+            .payment-container .payment-item .item-options {
+                display: block;
+                width: 100%;
+            }
+
+            .payment-container .payment-item .item-title {
+                margin-bottom: 20px;
+            }
+        }
+
+
+        /* Start delivery date implemenation ########################## */
+
+        .date-item {
+            border: 1px solid;
+            border-radius: 3px;
+            background: white;
+            cursor: pointer;
+            margin: 3px 0;
+        }
+
+            .date-item.no-delivery {
+                background: var(--bg-grey-500);
+                color: grey;
+            }
+
+                .date-item.no-delivery:hover {
+                    background: var(--bg-grey-500);
+                    color: grey;
+                }
+
+            .date-item.active {
+                background-color: var(--bs-warning);
+            }
+
+            .date-item:hover {
+                background: var(--bs-warning);
+                color: white;
+            }
+        /* End delivery date implemenation ########################## */
+
+
+        .order-items .item {
+            background: var(--bs-gray-200);
+        }
+    </style>
+    <script src="../Scripts/appsettings.js"></script>
+
+    <script src="../Content/general/js/jquery-3.6.3.min.js"></script>
+    <script src="../Content/general/js/app-data.js"></script>
+    <script src="../Content/general/js/lang.js"></script>
+    <script src="../Content/general/js/site.js%3Fv=4.1"></script>
+    <script src="../Scripts/en_ar_mapping.js%3Fv=4.1"></script>
+    <script src="../Content/toastr/toastr.min.js"></script>
+    <link href="../Content/toastr/toastr.min.css" rel="stylesheet" />
+
+    <script>
+
+
+        $(document).ready(function () {
+
+            localStorage.setItem("CouponId", 0);
+
+            $('#lblProducts').text();
+            $('#lblcustomername').text();
+            $('#lbladdress').text();
+            $('#lblMobileno').text();
+            $('#h2orderdetail').text();
+            $('#divcouponcode').text();
+            $('#deliverydate').text();
+
+            $('#divdeliveryscheduled').text();
+            //append("<label>" + getenar("Delivery Scheduled", lang) + "</label>");
+            $('#divpaymenttype').text();
+            $('#btnConfirm').text();
+            $('#lblcashondelivery').text();
+            $('#h2customerdetail').text();
+
+            $('#btnApply').val();
+
+            $('#lblsubscription1').text();
+            $('#lblsubscription2').text();
+            $('#linkback').text();
+
+
+            var lang = localStorage.getItem("lang");
+            if (lang == null) {
+                lang = "en";
+            }
+
+
+            $('#lblProducts').text(getenar("Products", lang));
+            $('#lblcustomername').text(getenar("Customer Name", lang));
+            $('#lbladdress').text(getenar("Address", lang));
+            $('#lblNote').text(getenar("Note", lang));
+            $('#lblMobileno').text(getenar("Mobile #", lang));
+            $('#h2orderdetail').text(getenar("Order Detail", lang));
+            $('#divcouponcode').text(getenar("Coupen Code", lang));
+            $('#deliverydate').text(getenar("Delivery Date", lang));
+
+            $('#divdeliveryscheduled').text(getenar("Delivery Scheduled", lang));
+            //append("<label>" + getenar("Delivery Scheduled", lang) + "</label>");
+            $('#divpaymenttype').text(getenar("Payment Type", lang));
+            $('#btnConfirm').text(getenar("Confirm and Pay", lang));
+            $('#lblcashondelivery').text(getenar("Cash", lang));
+            $('#h2customerdetail').text(getenar("Customer Detail", lang));
+            $('#btnApply').val(getenar("Apply", lang));
+            $('#lblsubscription1').text(getenar("8am - 2pm", lang));
+            $('#lblsubscription2').text(getenar("2pm - 5pm", lang));
+            $('#linkback').text(getenar("back", lang));
+
+            var objproductsWithCustomer = JSON.parse(localStorage.getItem("productsWithCustomer"));
+            var orderItemobj = JSON.parse(objproductsWithCustomer.SelectedProd)
+            var items = $(".order-items");
+            var totalPurchase = 0;
+            var deliveryCharge = parseFloat(objproductsWithCustomer.DeliveryCharge);
+            for (var i = 0; i < orderItemobj.length; i++) {
+                var itemTotal = parseFloat(orderItemobj[i].price) * parseFloat(orderItemobj[i].count);
+                var itemTemp = "";
+                if (orderItemobj[i].priceStatus == "0") {
+                    itemTemp = '<div id="' + orderItemobj[i].productId + '" class="item p-2 my-1"><div class="row"><div class="col-9"><p>' + orderItemobj[i].productName + '</p><p><strong class="count text-app-yellow">' + orderItemobj[i].count + '</strong><span class="text-secondary"> x ' + orderItemobj[i].price + ' ' + orderItemobj[i].priceLbl + '</span></p></div><div class="col-3 my-auto"><p class="text-app-blue">' + itemTotal.toFixed(3) + '</p> </div></div></div>';
+                }
+                else {
+                    itemTemp = '<div id="' + orderItemobj[i].productId + '" class="item p-2 my-1"><div class="row"><div class="col-9"><p>' + orderItemobj[i].productName + '</p><p><strong class="count text-app-yellow">' + orderItemobj[i].count + '</strong><span class="text-secondary"> x ' + orderItemobj[i].price + ' ' + orderItemobj[i].priceLbl + '</span>  <span class="mx-1 small text-danger text-decoration-line-through">' + orderItemobj[i].actualPrice + ' ' + orderItemobj[i].priceLbl + '</span> </p></div><div class="col-3 my-auto"><p class="text-app-blue">' + itemTotal.toFixed(3) + '</p> </div></div></div>';
+                }
+
+                items.append(itemTemp);
+                totalPurchase = totalPurchase + itemTotal;
+            }
+
+            var totalWithdelivery = parseFloat(totalPurchase) + parseFloat(deliveryCharge)
+
+
+
+            items.append(`<div class="p-2"><div class="row"><div class="col-9"><p class="text-secondary text-end"> Delivery Charge </p></div><div class="col-3 my-auto deliverydiv"><p class="">` + deliveryCharge.toFixed(3) + `</p> </div></div></div>`)
+            items.append('<div class="p-2"><div class="row" id="totalamountdiv"><div class="col-9 text-end my-auto"><p class="text-app-blue-light"> ' + getenar("Total", lang) + '  </p></div><div class="col-3 my-auto"><p class="text-app-blue-light fw-bolder">' + totalWithdelivery.toFixed(3) + '</p></div></div>');
+
+            $('#hdndeliveryCharge').val(deliveryCharge);
+
+            $('#hdnTotalAmount').val(totalPurchase.toFixed(3));
+            $('#hdnnetTotalAmount').val(totalPurchase.toFixed(3));
+
+
+            $('#lblCustName').text(objproductsWithCustomer.FullName);
+            $('#lblCustMobile').text(objproductsWithCustomer.Mobile);
+            if (objproductsWithCustomer.AddressType == "home") {
+                $('#lblCustAddress').text(getenar("Block", lang) + ":" + objproductsWithCustomer.Address1 + ",    " + getenar("Street", lang) + ":" + objproductsWithCustomer.Address2 + ",     " + getenar("Building", lang) + ":" + objproductsWithCustomer.Address3 + " , " + getenar("Governorate ", lang) + ":" + objproductsWithCustomer.Governorate + " , " + getenar("City ", lang) + ":" + objproductsWithCustomer.City + ", " + getenar("Avenue ", lang) + ":" + objproductsWithCustomer.Jarrah);
+            }
+            else {
+                // $('#lblCustAddress').text(getenar("Block", lang) + ":" + objproductsWithCustomer.Address1 + "," + getenar("Street", lang) + ":" + objproductsWithCustomer.Address2 + "," + getenar("Floor #", lang) + ":" + objproductsWithCustomer.Address4 + getenar("Apartment #", lang) +":" + objproductsWithCustomer.Address3);
+
+                const myArray = objproductsWithCustomer.Address4.split("~");
+
+                $('#lblCustAddress').text(getenar("Block", lang) + ":" + objproductsWithCustomer.Address1 + ",      " + getenar("Street", lang) + ":" + objproductsWithCustomer.Address2 + ",   " + getenar("Building", lang) + ":" + objproductsWithCustomer.Address3 + ",  " + getenar("Floor #", lang) + ":" + myArray[1] + ",    " + getenar("Apartment #", lang) + ":" + myArray[0] + " , " + getenar("Governorate ", lang) + ":" + objproductsWithCustomer.Governorate + " , " + getenar("City ", lang) + ":" + objproductsWithCustomer.City + ", " + getenar("Avenue ", lang) + ":" + objproductsWithCustomer.Jarrah);
+            }
+
+            $('#lblCustNote').text(objproductsWithCustomer.Note);
+
+
+            $('#btnApply').click(function () {
+
+                $('.discountAmt').empty();
+
+                if ($('#txtcoupon').val().length == 0) {
+
+                    toastr.error(getenar("Enter coupon code", lang));
+                    return false;
+                }
+
+                $('.page-loader-wrapper').show();
+
+                $.ajax({
+                    type: "GET",
+                    url: appBaseUrl + "apiorder/customercheckVoucher/" + $('#txtcoupon').val(),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                        $('.page-loader-wrapper').hide();
+
+                        var voucherObj = JSON.parse(response);
+                        // console.log(voucherObj);
+
+
+                        if (voucherObj.Id == 0) {
+                            toastr.error(getenar("Invalid coupen", lang));
+                            $('#txtcoupon').val("");
+                        }
+
+                        if (voucherObj.Id > 0) {
+
+                            $('#totalamountdiv').empty();
+                            var offerType = voucherObj.OfferType;
+
+                            var prevTotal = 0;// parseFloat($('#hdnTotalAmount').val());
+                            var disCount = 0;// voucherObj.OfferPercent;
+                            var calculateddisCount = 0;// ((parseFloat(prevTotal) / 100) * parseInt(disCount));
+                            var netAmount = 0;// parseFloat(prevTotal - calculateddisCount).toFixed(3);
+                            var deliveryCharge = parseFloat($('#hdndeliveryCharge').val());
+
+
+                            if (voucherObj.IsDeliveryFree == "1") {
+                                deliveryCharge = "0";
+
+                                $('.order-items .deliverydiv').addClass('text-decoration-line-through text-line-through text-danger');
+                            }
+                            else {
+                                $('.order-items .deliverydiv').removeClass('text-decoration-line-through text-line-through text-danger');
+                            }
+
+                            if (offerType == "percentage") {
+                                prevTotal = parseFloat($('#hdnTotalAmount').val());
+                                disCount = voucherObj.OfferPercent;
+
+                                calculateddisCount = (parseFloat(prevTotal) / 100) * parseFloat(disCount);
+
+                                netAmount = parseFloat(prevTotal) - parseFloat(calculateddisCount);
+                            }
+                            else {
+
+                                prevTotal = parseFloat($('#hdnTotalAmount').val());
+                                disCount = voucherObj.OfferAmount;
+                                calculateddisCount = parseFloat(disCount);// parseFloat(prevTotal) - parseInt(disCount);// ((parseFloat(prevTotal) / 100) * parseInt(disCount));
+                                netAmount = parseFloat(prevTotal) - parseFloat(calculateddisCount);
+                            }
+
+                            netAmount = parseFloat(netAmount) + parseFloat(deliveryCharge);
+
+                            var disCountstr = "";
+
+                            if (offerType == "percentage") {
+                                disCountstr = disCount + ' % ';
+                            }
+                            else {
+                                disCountstr = parseFloat(disCount).toFixed(3);
+                            }
+
+                            //$('#totalamountdiv').append('<div class="col-9 text-end my-auto"><h4>Delivery Charge:  ' + deliveryCharge + '</h4> <h4 class="text-app-blue-light">' + getenar("Discount", lang) + ' ' + disCountstr + ' </h4><h4 class="text-app-blue-light">' + getenar("Net Total", lang) + '</h4></div><div class="col-3 my-auto"><h1 class="text-app-blue-light">' + parseFloat(netAmount).toFixed(3) + '</h1></div>');
+
+                            var totalAmountTemp = `<div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-9 text-end my-auto">
+                                                                <p class="text-app-blue-light">${getenar("Discount", lang) }</p>
+                                                            </div>
+                                                            <div class="col-3 my-auto">
+                                                                <p class="text-secondary fw-bold">${disCountstr}</p>
+                                                            </div>
+                                                            <div class="col-9 text-end my-auto">
+                                                                <p class="text-app-blue-light">Net Total</p>
+                                                            </div>
+                                                            <div class="col-3 my-auto">
+                                                                <p class="text-app-blue-light fw-bold">${parseFloat(netAmount).toFixed(3) }</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>`;
+
+                            $('#totalamountdiv').append(totalAmountTemp);
+
+                            $('#hdnnetTotalAmount').val(netAmount);
+                            $('#hdnCouponcode').val($('#txtcoupon').val());
+                            $('#hdnCouponId').val(voucherObj.Id);
+                            localStorage.setItem("CouponId", voucherObj.Id);
+
+                            if (offerType == "percentage") {
+                                $('#hdnDiscount').val(voucherObj.OfferPercent);
+                            }
+                            else {
+                                $('#hdnDiscount').val(voucherObj.OfferAmount);
+                            }
+
+                            $('#hdnDiscountAmount').val(calculateddisCount);
+                            $('#hdnOfferType').val(voucherObj.OfferType);
+
+
+                        }
+
+                    },
+                    failure: function (response) {
+                        // alert(response.responseText);
+                        // alert("Failure");
+                    },
+                    error: function (response) {
+                        // alert(response);
+                        // alert("Error");
+                    }
+                });
+
+            });
+
+
+            $('#btnConfirm').click(function () {
+                
+                localStorage.removeItem("selectedcartitem");
+
+                if ($('#btnConfirm').attr("isclicked") == "Y") {
+
+                    return false;
+                }
+
+                $('#btnConfirm').attr("isclicked", "Y");
+                $('.page-loader-wrapper').show();
+                window.scrollTo(0, 0);
+
+
+
+
+                //objproductsWithCustomer.paymentType = $('input[name="support"]:checked').val();
+                objproductsWithCustomer.paymentType = $('input[name="support"]:checked').val();
+                objproductsWithCustomer.DeliveryDate = $('#txtDeliveryDate').val();
+
+                objproductsWithCustomer.scheduleTime = $('input[name="subscription"]:checked').val();
+                objproductsWithCustomer.VouvherOrderInfo = {
+                    "TotalAmunt": $('#hdnTotalAmount').val(),
+                    "NetAmount": $('#hdnnetTotalAmount').val(),
+                    "CounponCode": $('#hdnCouponcode').val(),
+                    //"DiscountId": $('#hdnCouponId').val(),
+                    "DiscountId": localStorage.getItem("CouponId"),
+                    "DiscountPercent": $('#hdnDiscount').val(),
+                    "DiscountedAmount": $('#hdnDiscountAmount').val(),
+                    "DiscountType": $('#hdnOfferType').val(),
+                    "DeliveryCharge": $('#hdndeliveryCharge').val()
+                };
+
+                objproductsWithCustomer.CreatedBy = $('#appCurrentUserId').val();
+
+
+
+                var weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+
+                var currentDate = new Date(); // for now
+                var currenthour = currentDate.getHours(); // => 9
+                var currentminutes = currentDate.getMinutes(); // =>  30
+                var currentSeconds = currentDate.getSeconds(); // => 51
+
+
+                var deliveryDate = new Date();
+                if ($('#txtDeliveryDate').val().length == 0) {
+                    deliveryDate.setDate(deliveryDate.getDate() + 1);
+                } else {
+                    deliveryDate = new Date($('#txtDeliveryDate').val());
+                }
+
+                var deliveryDay = weekday[deliveryDate.getDay()];
+
+
+                var getCurrentDateString = (currentDate.getMonth() + 1) + "-" + currentDate.getDate() + "-" + currentDate.getFullYear();
+                var getDeliveryDateString = (deliveryDate.getMonth() + 1) + "-" + deliveryDate.getDate() + "-" + deliveryDate.getFullYear();
+
+
+
+                if (getCurrentDateString == getDeliveryDateString) {
+
+                    // alert("Delivery Can't done on same day of ordered date.")
+
+                    ///deliveryDate.setDate(deliveryDate.getDate() + 1)
+
+                    toastr.error("Delivery date should be tommorrow onwards");
+
+                    return false;
+
+
+                }
+
+
+
+                if (parseInt(currenthour) > parseInt(18)) {
+
+                    if ($('#txtDeliveryDate').val().length == 0) {
+                        deliveryDate.setDate(deliveryDate.getDate() + 1);
+                    }
+
+                    currentDate.setDate(currentDate.getDate() + 1);
+
+                    getCurrentDateString = (currentDate.getMonth() + 1) + "-" + currentDate.getDate() + "-" + currentDate.getFullYear();
+                    getDeliveryDateString = (deliveryDate.getMonth() + 1) + "-" + deliveryDate.getDate() + "-" + deliveryDate.getFullYear();
+
+                    //   alert(getCurrentDateString + '==' + getDeliveryDateString);
+
+                    if (getCurrentDateString == getDeliveryDateString) {
+
+                        // alert("Order booked after 6 PM will not be delivered on next Day");
+                        //return false;
+                    }
+
+
+                }
+
+
+
+
+                deliveryDay = weekday[deliveryDate.getDay()];
+
+
+
+                if (deliveryDay == "friday") {
+
+                    // alert("Order Will not be deliver on Friday");
+
+                    deliveryDate.setDate(deliveryDate.getDate() + 1)
+
+                    objproductsWithCustomer.DeliveryDate = deliveryDate.getFullYear() + "-" + (deliveryDate.getMonth() + 1) + "-" + deliveryDate.getDate();
+
+                    //return false;
+                }
+
+
+
+                if ($('#txtDeliveryDate').val().length == 0) {
+
+
+
+                    objproductsWithCustomer.DeliveryDate = deliveryDate.getFullYear() + "-" + (deliveryDate.getMonth() + 1) + "-" + deliveryDate.getDate();
+
+                }
+
+                //alert(deliveryDate.getFullYear() + "-" + (deliveryDate.getMonth() + 1) + "-" + deliveryDate.getDate());
+
+
+
+                var apiUrl = appBaseUrl + "apiorder/customerconfirm";
+
+                //console.log(objproductsWithCustomer);
+
+                
+                $.ajax({
+                    type: "POST",
+                    url: apiUrl,
+                    data: JSON.stringify(objproductsWithCustomer),
+                    contentType: "application/json; charset=utf-8",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data, status, jqXHR) {
+                            localStorage.removeItem("CouponId");
+                            $('.page-loader-wrapper').hide();
+                            var jsonData = JSON.parse(data);
+
+                        
+                        if (jsonData.id == "1") {
+
+
+
+                            if ($('input[name="support"]:checked').val() == "knet") {
+                                var url = JSON.parse(jsonData.result).transaction.url;
+                                window.location.href = url;
+                            }
+                            else if ($('input[name="support"]:checked').val() == "cashondelivery") {
+                                window.location.href = "../payment/vieworder?onum=" + jsonData.result+"&t=0";
+                            }                            
+                            else {
+                                window.location.href = jsonData.result;
+                            }
+                        }
+
+                        //window.location.href = paymentData.transaction.url;
+
+
+                        /// window.location.href = "../user/Index";
+
+                    },
+
+                    error: function (jqXHR, status) {
+                        // error handler
+                        console.log(jqXHR);
+                        alert('fail' + status.code);
+                    }
+                });
+                
+            });
+
+
+
+
+            // $.ajax({
+                // type: "GET",
+                // url: appBaseUrl + "apiproduct/customergetschedule",
+                // contentType: "application/json; charset=utf-8",
+                // dataType: "json",
+                // success: function (response) {
+
+                    var resData = JSON.parse( "{\"result\":\"[{\\\"Id\\\":2,\\\"StartTime\\\":\\\"1 am \\\",\\\"StartValue\\\":\\\"1\\\",\\\"EndTime\\\":\\\"10 am \\\",\\\"EndValue\\\":\\\"10\\\",\\\"CreatedBy\\\":null,\\\"IsActive\\\":true,\\\"IsEnabled\\\":true,\\\"Type\\\":\\\"\\\"}]\",\"id\":\"1\",\"url\":null,\"userinfo\":null}");
+                    if (resData.id == "1") {
+                        var objSchedule = JSON.parse(resData.result);
+
+                      //  getDeliveryDates(objSchedule[0].EndValue);
+
+
+                        $(objSchedule).each(function () {
+
+                            //var d1 = "<div class='selection'><input type='radio'  name='subscription' id='subscription' tovalue='" + (this).EndValue + "' fromvalue='" + (this).StartValue + "' checked='checked' value='" + (this).StartTime + "-" + (this).EndTime + "'/>";
+                            //var d2 = "<label for='subscription'>" + (this).StartTime + " - " + (this).EndTime + "<span></span></label><div class='check'></div></div>";
+
+
+                            var d1 = "<div class='selection'><input type='radio'  name='subscription' id='subscription' tovalue='4pm' fromvalue='8am' checked='checked' value='8am - 4pm'/>";
+                            var d2 = "<label for='subscription'>8am -  4pm<span></span></label><div class='check'></div></div>";
+
+
+                            $('#divscheduledtime').append(d1 + d2);
+
+
+                        });
+                    }
+
+                // }
+                // failure: function (response) {
+                //     // alert(response.responseText);
+                //     // alert("Failure");
+                // },
+                // error: function (response) {
+                //     // alert(response);
+                //     // alert("Error");
+                // }
+            // });
+
+
+
+            function navigateToHome() {
+                window.location.href = "../";
+            }
+
+
+
+
+        });
+
+
+
+
+
+
+    </script>
+
+    <script>
+        // Page variables
+        var divOrder = $("#divOrder");
+        var divOrderConfirmation = $(".order-confirmation");
+
+
+        //divOrderConfirmation.hide();
+        // Pre-define function
+        function bindCustomerDetail() {
+            var custDetail = getSessionCustomer();
+            if (custDetail) {
+                addressTemp =
+                    `<div>Building: <strong>` +
+                    custDetail.building +
+                    `</strong></div>
+                                                                            <div>Street: <strong>` +
+                    custDetail.street +
+                    `</strong></div>
+                                                                            <div>Block: <strong>` +
+                    custDetail.block +
+                    `</strong></div>
+                                                                            <div>City: <strong>` +
+                    custDetail.city +
+                    `</strong></div>`;
+
+                $("#lblCustName").text(custDetail.name);
+                $("#lblCustMobile").text(custDetail.mobile);
+                $("#lblCustAddress").html(addressTemp);
+            }
+        }
+        function handleView(clickedAction) {
+            if (clickedAction == "login") {
+                divLogin.hide();
+                divOrder.hide();
+                divRegister.show("slow");
+            }
+            if (clickedAction == "register") {
+                // divRegister.hide();
+                divOrder.hide();
+                divLogin.show("slow");
+            }
+        }
+
+
+    </script>
+
+    <script>
+        function handleCustomerLogin() {
+            handleCustNextBtnState(false);
+            var txtCustMobile = $("#txtCustMobile").val();
+
+            if (!txtCustMobile) {
+                alert("Please enter mobile number");
+                return false;
+            }
+            var tempAppUsers = getAppUsers();
+
+            var cust = tempAppUsers.filter((item) => item.mobile == txtCustMobile);
+
+            if (cust.length == 0) {
+                alert("Customer not found.");
+                return false;
+            }
+
+            setSessionCustomer(cust[0]);
+
+            $("#txtRCustName").val(cust[0].name);
+            $("#txtRCustMobile").val(cust[0].mobile);
+            $("#txtRCustAddress").val(cust[0].address);
+
+            handleCustNextBtnState(true);
+        }
+
+        function handleCustomerReset() {
+            // $("#txtCustMobile").val("");
+            // $("#txtRCustName").val("");
+            // $("#txtRCustMobile").val("");
+            // $("#txtRCustAddress").val("");
+            // divOrder.hide();
+            // divLogin.show("slow");
+            // sessionStorage.removeItem("customer");
+            history.back();
+        }
+        function handleCustomerRegister() {
+            var txtRCustName = $("#txtRCustName").val();
+            var txtRCustMobile = $("#txtRCustMobile").val();
+            var txtRCustAddress = $("#txtRCustAddress").val();
+
+            if (!txtRCustName) {
+                alert("Please enter the name");
+                return false;
+            }
+            if (!txtRCustMobile) {
+                alert("Please enter the mobile number");
+                return false;
+            }
+            if (!txtRCustAddress) {
+                alert("Please enter the address");
+                return false;
+            }
+            setSessionCustomer({
+                name: txtRCustName,
+                mobile: txtRCustMobile,
+                address: txtRCustAddress,
+            });
+            bindCustomerDetail();
+            // divRegister.hide();
+            divOrder.show("slow");
+        }
+    </script>
+
+</head>
+<body>
+
+
+
+    <!-- Page Loader starts -->
+    <div class="page-loader-wrapper" style="display: none;">
+        <div class="d-flex justify-content-center align-items-center position-absolute w-100" style="height: 100vh;
+    background: rgba(0,0,0,0.6); z-index: 99999;">
+            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <!-- Page Loader End -->
+
+    <input type="hidden" id="hdndeliveryCharge" value="0" />
+    <input type="hidden" id="hdnTotalAmount" value="0" />
+    <input type="hidden" id="hdnnetTotalAmount" value="0" />
+    <input type="hidden" id="hdnDiscountAmount" value="0" />
+    <input type="hidden" id="hdnCouponcode" value="0" />
+    <input type="hidden" id="hdnCouponId" value="0" />
+    <input type="hidden" id="hdnDiscount" value="0" />
+    <input type="hidden" id="hdnOfferType" value="" />
+
+    <nav class="bg-app-yg fixed-top px-1 px-md-3 shadow-lg">
+        <div class="row">
+            <div class="col-4 my-auto">
+                <div class="text-start fs-5 my-auto">
+                    <span class="bg-opacity-50 bg-secondary p-1 rounded shadow btn fw-bold" onclick="swithLang()">
+                        <span class="px-2" data-lang="lblLanguage">عربي</span>
+                    </span>
+                    <a class="mx-3 mx-md-5 text-white" href="../index.html" data-lang="lblProducts" id="lblProducts">Order Confirm</a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-center my-auto">
+                    <a href="../index.html">
+                        <img src="../Content/general/img/main-logo.png" height="70" alt="" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 my-auto">
+                <div class="my-auto">
+                    <button class="btn btn-light btn-sm d-none">Login</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="page-content-section">
+        <div class="page-content container py-5">
+            <div id="divOrder">
+                <div class="border p-2 rounded shadow-sm">
+                    <h6 class="my-4 text-app-blue-light fw-bold" id="h2customerdetail">Customer Detail</h6>
+
+                    <div class="g-2 row">
+                        <div class="col-6">
+                            <label class="text-secondary small" id="lblcustomername">Customer Name</label>
+                            <p><strong id="lblCustName">Mohamed Salihu</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <label class="text-secondary small" id="lblMobileno">Mobile #</label>
+                            <p><strong id="lblCustMobile">67752065</strong></p>
+                        </div>
+                        <div class="col-12">
+                            <label class="text-secondary small" id="lbladdress">Address</label>
+                            <div id="lblCustAddress"></div>
+                        </div>
+                        <div class="col-12">
+                            <label class="text-secondary small" id="lblNote">Note</label>
+                            <div id="lblCustNote"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="my-5 border p-2 rounded shadow-sm">
+                    <h6 class=" py-3 text-app-blue-light fw-bold" id="h2orderdetail">Order Detail</h6>
+                    <div class="order-items"></div>
+                    <div class="order-confirmation">
+                        <div class="payment-container mt-5">
+                            <!--
+                            <div class="form-control payment-item">
+                                <div class="" id="divcouponcode"></div>
+                                <div class="row">
+                                    <div class="col-md-4 mt-1"><input type="text" id="txtcoupon" class="form-control"></div>
+                                    <div class="col-3 col-md-4 mt-1"><input type="button" class="btn btn-primary col-md-4" id="btnApply" value="" /></div>
+                                </div>
+                            </div>
+                            -->
+                            <div class="payment-item">
+                                <div class="item-title" id="deliverydate"></div>
+                                <div class="item-options">
+                                    <!-- Add below line for delivery date implmention -->
+                                    <div class="d-flex flex-wrap" id="date-container"></div>
+                                    <div>
+                                        <input type="date" id="txtDeliveryDate" class="form-control d-none">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-item">
+                                <div class="item-title" id="divdeliveryscheduled">
+                                </div>
+                                <div class="item-options">
+                                    <div class="selection" id="divscheduledtime">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="item-title" id="divpaymenttype">
+
+                                </div>
+                                <div class="item-options">
+
+                                    
+
+                                    <!-- <div class="selection">
+                                        <input type="radio" name="support" id="support" value="cashondelivery" checked="checked" />
+                                        <label for="support" id="lblcashondelivery">
+
+                                            <span></span>
+                                        </label>
+                                        <div class="check"></div>
+                                    </div> -->
+                                    <div class="selection">
+                                        <input type="radio" name="support" id="support-2" value="knet" checked/>
+                                        <label for="support-2">
+                                            KNET
+                                            <span></span>
+                                        </label>
+                                        <div class="check"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-5">
+
+                            
+
+                            <a id="btnConfirm" isclicked="N" class="btn btn-primary fs-2 w-100">
+
+                                <i class="bi bi-arrow-right mx-1"></i>
+                            </a>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- <div id="divOrderSummary" class="order-summary"></div> -->
+            <!-- <hr /> -->
+            <div class="my-5">
+                <a href="../user/index" class="btn btn-secondary btn-sm">
+                    <i class="mx-1 bi bi-arrow-left" id="linkback"></i>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+
+
+        // Start delivery date implemenation ##########################
+        function getDeliveryDates(closeTime) {
+            var dateItemTemp = `<div class="date-item text-center p-1 p-md-1 px-md-1 px-md-3 me-2 cursor-pointer {noDelivery}" onclick="handleSelectDate(this, '{dc}')">
+                                                          <h4>{date}</h4>
+                                                          <div class="my-1 text-secondary"><small>{monthYr}</small></div>
+                                                          <h4>{day}</h4>
+                                                        </div>`;
+
+            $("#date-container").empty();
+
+            const selLang = getPreferredLang(); // getPreferredLang(); // You should get language either ar/en
+            var itemCount = 1;
+
+            for (let i = 1; itemCount < 6; i++) {
+                let d = new Date();
+                if (itemCount == 1 && d.getHours() >= Number(closeTime)) { // if time is greater then 6pm, to ingore tomorrow
+                    i++
+                }
+
+                d.setDate(d.getDate() + i);
+
+                var temp = dateItemTemp.replace("{date}", d.getDate())
+                    .replace("{dc}", i)
+                    .replace("{noDelivery}", d.getDay() == 5 ? "no-delivery" : "")
+                    .replace("{monthYr}", d.toLocaleString(selLang, { month: "short" }) + "," + d.getFullYear())
+                    .replace("{day}", d.toLocaleString(selLang, { weekday: "short" }));
+                $("#date-container").append(temp);
+                itemCount++;
+            }
+        }
+
+        getDeliveryDates(18);
+
+        function handleSelectDate(ev, dc) {
+            const today = new Date();
+            today.setDate(today.getDate() + Number(dc));
+            if (today.getDay() != 5) {
+                document.getElementById("txtDeliveryDate").valueAsDate = today;
+                $(".date-item").removeClass("active");
+                $(ev).addClass("active");
+            }
+        }
+
+                                          // End delivery date implemenation ##########################
+
+    </script>
+</body>
+</html>

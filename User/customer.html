@@ -1,0 +1,779 @@
+∆
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" /> 
+    <title>KUPCO | Products</title>
+
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="../Content/general/fav/apple-touch-icon.png" />
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="../Content/general/fav/favicon-32x32.png" />
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="../Content/general/fav/favicon-16x16.png" />
+    <link rel="manifest" href="../Content/general/fav/site.webmanifest" />
+
+    <link id="css-ltr" rel="stylesheet" href="../Content/general/css/bootstrap.min.css" />
+    <!-- Keep linkBootstrap for dynamic language -->
+    <link rel="stylesheet" href="../index.html.br" id="linkBootstrap">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../Content/general/css/site.css%3Fv=4.1.css" />
+    <link href="../Content/assets/css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <script src="../Scripts/appsettings.js"></script>
+
+    <script src="../Content/general/js/jquery-3.6.3.min.js"></script>
+    <script src="../Content/general/js/app-data.js"></script>
+    <script src="../Content/general/js/lang.js"></script>
+    <script src="../Content/general/js/site.js%3Fv=4.1"></script>
+    <script src="../Scripts/en_ar_mapping.js%3Fv=4.1"></script>
+    <script type="text/javascript" src="../Content/toastr/toastr.min.js"></script>
+    <link href="../Content/toastr/toastr.min.css" rel="stylesheet" />
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#divtxtApartment').hide();
+            $('#divtxtFloor').hide();
+            $('#divtxtRCustBuilding').hide();
+
+            var lang = localStorage.getItem("lang");
+            if (lang == null) {
+                lang = "en";
+            }
+
+            //$('#lblPageTitle').text(getenar("Fresh Products", lang));
+
+            $('#lblcontinueorder').text(getenar("Enter your mobile number to continue the order", lang));
+            $('#h2entermobile').text(getenar("Enter Mobile #", lang));
+            $('#h2customerinfo').text(getenar("Customer Info", lang));
+            $('#lblifnew').text(getenar("If new, please fill below detail and continue next", lang));
+            $('#lblfullname').text(getenar("Fullname", lang));
+            $('#lblmobilenumber').text(getenar("Mobile #", lang));
+            $('#lblcity').text(getenar("City", lang));
+            $('#lblblock').text(getenar("Block", lang));
+            $('#lblstreet').text(getenar("Street", lang));
+            $('#lblbuildingno').text(getenar("Building No #", lang));
+            $('#lblnote').text(getenar("Note", lang));
+            $('#btnSave').text(getenar("Next", lang));
+            $('#lbldeliveryplace').text(getenar("Delivery Place", lang));
+            $('#btnSearch').val(getenar("Login", lang));
+            $('#lblGovernorate').text(getenar("Governorate", lang));
+            $('#lblJarrah').text(getenar("Avenue", lang));
+            $('#lblFloorno').text(getenar("Floor #", lang));
+            $('#lblapartment').text(getenar("Apartment #", lang));
+
+
+            $(".delivery-place").click(function () {
+
+
+                $(".delivery-place").removeClass('active');
+                $(this).addClass('active');
+
+                var adr = ($(this).attr("addresstype"));
+
+                if (adr == "home") {
+
+                    $('#divtxtApartment').hide();
+                    $('#divtxtFloor').hide();
+                    $('#divtxtRCustBuilding').show();
+                }
+                else {
+                    $('#divtxtApartment').show();
+                    $('#divtxtFloor').show();
+                    $('#divtxtRCustBuilding').show();
+                }
+
+            });
+
+            let customerExistingInfo = null;
+            
+            $('#btnSearch').click(function () {
+
+                if ($('#txtCustMobile').val().length == 0) {
+                    toastr.error(getenar("Enter Mobile Number", lang));
+                    return false;
+                }
+                if ($('#txtCustMobile').val().length != 8) {
+                    toastr.error(getenar("Enter valid Mobile Number", lang));
+                    return false;
+                }
+                $('.page-loader-wrapper').show();
+                // $.ajax({
+                //     type: "GET",
+                //     url: appBaseUrl + "apicustomer/customergetbynumber/" + $('#txtCustMobile').val(),
+                //     contentType: "application/json; charset=utf-8",
+                //     dataType: "json",
+                //     success: function (response) {
+                        $('.page-loader-wrapper').hide();
+                        var customer = JSON.parse("[{\"Id\":1,\"Name\":\"AL JAHRA\",\"Name_Ar\":\"الجهراء\",\"IsActive\":true},{\"Id\":2,\"Name\":\"Hawalli\",\"Name_Ar\":\"حولي\",\"IsActive\":true},{\"Id\":3,\"Name\":\"AL ASIMAH\",\"Name_Ar\":\" العاصمه\",\"IsActive\":true},{\"Id\":4,\"Name\":\"AL Ahmadi\",\"Name_Ar\":\"الاحمدي\",\"IsActive\":true},{\"Id\":5,\"Name\":\"Al Farwaniya\",\"Name_Ar\":\"الفروانيه\",\"IsActive\":true},{\"Id\":6,\"Name\":\"MUBARAK AL KABEER\",\"Name_Ar\":\"مبارك الكبير\",\"IsActive\":true}]");
+                        console.log(customer);
+                        if (customer.Id == 0) {                                  
+                            $('#txtRCustName').val('');
+                            $('#txtRCustMobile').val('');
+                            $('#optCustCity').val('');
+                            $('#txtRCustBlock').val('');
+                            $('#txtRCustStreet').val('');
+                            $('#txtRCustBuilding').val('');
+                            $('#txtApartment').val('');
+                            $('#txtFloor').val('');
+                            $('#hdnCustomerId').val('');
+                            $('#txtRCustNote').val('');
+                            $('#txtJarrah').val('');                            
+                            $('.delivery-place.office').removeClass('active');
+                            $('.delivery-place.home').removeClass('active');
+                            toastr.error(getenar("not exist", lang));
+                            return false;
+                        }
+                        else {
+                            customerExistingInfo = customer;
+                        }
+
+                        var myArray = customer.Address4.split('~');
+
+                        if (myArray.length == 2) {
+
+                            $('#txtApartment').val(myArray[0]);
+                            $('#txtFloor').val(myArray[1]);
+                        }
+
+                        $('#optGovernorate').val(customer.GovernorateId);
+                        loadCity(customer.GovernorateId, customer.CityId);
+                        $('.delivery-place.office').removeClass('active');
+                        $('.delivery-place.home').removeClass('active');
+                        $('#txtRCustName').val(customer.FullName);
+                        $('#txtRCustMobile').val(customer.Mobile);
+                        $('#txtRCustBlock').val(customer.Address1);
+                        $('#txtRCustStreet').val(customer.Address2);
+                        $('#txtRCustBuilding').val(customer.Address3);                       
+                        $('#hdnCustomerId').val(customer.Id);
+                        $('#txtRCustNote').val(customer.Note);
+                        $('.delivery-place.' + customer.AddressType).addClass('active');
+                        $('#txtJarrah').val(customer.Jarrah);
+                        if (customer.AddressType == "home") {
+                            $('#divtxtApartment').hide();
+                            $('#divtxtFloor').hide();
+                            $('#divtxtRCustBuilding').show();
+                        }
+                        else {
+                            $('#divtxtApartment').show();
+                            $('#divtxtFloor').show();
+                            $('#divtxtRCustBuilding').show();
+                        }
+                       $('#optCustCity').val(customer.CityId);
+
+                //     },
+                //     failure: function (response) {
+                //         alert(response.responseText);
+                //         alert("Failure");
+                //     },
+                //     error: function (response) {
+                //         alert(response);
+                //         alert("Error");
+                //     }
+                // });
+
+            });
+
+            /*------------------------------------Governorate Sart--------------------------------------------*/
+            $('.page-loader-wrapper').show();
+            var optGovernorate = $('#optGovernorate');
+            // $.ajax({
+            //     type: "GET",
+            //     url: "file:///Users/mohamedhorani/websites/orderkupco.net/apicustomer/usergovernarate/ar.json",
+            //     contentType: "application/json; charset=utf-8",
+            //     dataType: "json",
+            //     success: function (response) {
+                    $('.page-loader-wrapper').hide();
+                    var governorateList = JSON.parse("[{\"Id\":1,\"Name\":\"AL JAHRA\",\"Name_Ar\":\"الجهراء\",\"IsActive\":true},{\"Id\":2,\"Name\":\"Hawalli\",\"Name_Ar\":\"حولي\",\"IsActive\":true},{\"Id\":3,\"Name\":\"AL ASIMAH\",\"Name_Ar\":\" العاصمه\",\"IsActive\":true},{\"Id\":4,\"Name\":\"AL Ahmadi\",\"Name_Ar\":\"الاحمدي\",\"IsActive\":true},{\"Id\":5,\"Name\":\"Al Farwaniya\",\"Name_Ar\":\"الفروانيه\",\"IsActive\":true},{\"Id\":6,\"Name\":\"MUBARAK AL KABEER\",\"Name_Ar\":\"مبارك الكبير\",\"IsActive\":true}]");
+                    var loopCount = 0;
+                    var optionempty = $("<option />");
+                    optionempty.val(0);
+                    optionempty.html("-----------");
+                    optGovernorate.append(optionempty);
+                    $(governorateList).each(function () {
+                        var option = $("<option />");
+                        if (lang == "ar") {
+                            option.html(this.Name_Ar);
+                        }
+                        else {
+                            option.html(this.Name);
+                        }
+                        option.val(this.Id);
+                        optGovernorate.append(option);
+                        loopCount = loopCount + 1;
+                    });
+            //     },
+            //     failure: function (response) {
+            //         alert(response.responseText);
+            //         alert("Failure");
+            //     },
+            //     error: function (response) {
+            //         alert(response);
+            //         alert("Error");
+            //     }
+            // });
+
+            $('#optGovernorate').change(function () {
+                loadCity($(this).val(),"");
+            });
+            function loadCity(governorateId, selectedId) {
+
+                //var governorateId = $(this).val();
+                var optCustCity = $('#optCustCity');
+                $('.page-loader-wrapper').show();
+
+                // $.ajax({
+                //     type: "GET",
+                //     url: appBaseUrl + "apicustomer/customercities/" + lang + "/" + governorateId,
+                //     contentType: "application/json; charset=utf-8",
+                //     dataType: "json",
+                //     success: function (response) {
+                        optCustCity.empty();
+                        $('.page-loader-wrapper').hide();
+                        var cityList = JSON.parse('[{"Id":94,"Name":"al Omaria","Name_Ar":"العمريه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":95,"Name":"Al Andalus","Name_Ar":"الاندلس","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":96,"Name":"Al Ferdous","Name_Ar":"الفردوس","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":97,"Name":"Al rabia","Name_Ar":"الرابيه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":98,"Name":"Al Farwaniya ","Name_Ar":"الفروانيه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":99,"Name":"Jleeb Al-Shuyoukh","Name_Ar":"جليب الشيوخ","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":100,"Name":"Sabah Al Nasser","Name_Ar":"صباح الناصر","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":101,"Name":"Al Jahra","Name_Ar":"الجهراء","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":102,"Name":"Al Waha","Name_Ar":"الواحه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":103,"Name":"Al Qaser","Name_Ar":"القصر","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":104,"Name":"Al Nasseem","Name_Ar":"النسيم","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":105,"Name":"Al Oyoun","Name_Ar":"العيون","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":106,"Name":"Taima","Name_Ar":"تيماء","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":107,"Name":"Saad Al Abdullah","Name_Ar":"سعد العبدالله","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":108,"Name":"Jaber Al Ahmed","Name_Ar":"جابر الاحمد","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":109,"Name":"Al Sulaibikhat","Name_Ar":"الصليبخات","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":110,"Name":"Qurnata","Name_Ar":"غرناطه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":111,"Name":"Qairawan","Name_Ar":"القيروان","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":112,"Name":"Al Doha","Name_Ar":"الدوحه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":113,"Name":"Al Sulaibiya","Name_Ar":"الصليبيه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":114,"Name":"Ashbilia","Name_Ar":"اشبيليه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":115,"Name":"Al Surra","Name_Ar":"السره","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":116,"Name":"Rihab","Name_Ar":"الرحاب","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":117,"Name":"Al naeem","Name_Ar":"النعيم","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":118,"Name":"Qasaym Al Nasseem","Name_Ar":"قسائم النسيم","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":119,"Name":"Al Salam","Name_Ar":"السلام","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":120,"Name":"Al Sadiq","Name_Ar":"الصديق","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":121,"Name":"Al Zahra","Name_Ar":"الزهراء","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":122,"Name":"Al Shuhada","Name_Ar":"الشهداء","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":123,"Name":"Qartabah","Name_Ar":"قرطبه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":124,"Name":"kayfan","Name_Ar":"كيفان ","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":125,"Name":"Shamiya","Name_Ar":"الشاميه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":126,"Name":"aladailiya","Name_Ar":"العديليه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":127,"Name":"alDaiya","Name_Ar":"الدعيه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":128,"Name":"alNuzha","Name_Ar":"النزهه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":129,"Name":"alfiha","Name_Ar":"الفيحاء","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":130,"Name":"aldasma","Name_Ar":"الدسمه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":131,"Name":"Al Shaab","Name_Ar":"الشعب","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":132,"Name":"Bneid Al-Gar","Name_Ar":"بنيد القار","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":133,"Name":"sharq","Name_Ar":"الشرق","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":134,"Name":"Khalidiya","Name_Ar":"الخالديه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":135,"Name":"aljabria","Name_Ar":"الجابريه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":136,"Name":"Al Mansouria","Name_Ar":"المنصوريه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":137,"Name":"Abdulla Al-Salem","Name_Ar":"ضاحيه عبدالله السالم ","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":138,"Name":"Qadsiya","Name_Ar":"القادسيه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":139,"Name":"Midan Hawally","Name_Ar":"ميدان حولي","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":140,"Name":"AlSalmiya","Name_Ar":"السالميه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":141,"Name":"Al-Yarmouk","Name_Ar":"اليرموك","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":142,"Name":"Al ADAILIAH","Name_Ar":"العديليه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":143,"Name":"Mishref","Name_Ar":"مشرف","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":144,"Name":"Al Romaithia","Name_Ar":"الرميثيه","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":145,"Name":"Bayan","Name_Ar":"بيان","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":146,"Name":"west Mishref","Name_Ar":"غرب مشرف","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":147,"Name":"salwa","Name_Ar":"سلوى","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":148,"Name":"Sabah Al-Salem","Name_Ar":"صباح السالم","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":149,"Name":"Mubarak Al-Kabeer","Name_Ar":"مبارك الكبير","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":150,"Name":"Al Qurain","Name_Ar":"القرين","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":151,"Name":"Al Adan","Name_Ar":"العدان","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":152,"Name":"Al-Qusour","Name_Ar":"القصور","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":153,"Name":"Abu Al Hasaniya","Name_Ar":"ابو الحصانيه","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":154,"Name":"Al Misila","Name_Ar":"المسيله","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":155,"Name":"Al misaail","Name_Ar":"المسايل","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":156,"Name":"Daher","Name_Ar":"الظهر","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":157,"Name":"Al Funaitis","Name_Ar":"الفنيطيس","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":158,"Name":"Al Fintas","Name_Ar":"الفنطاس","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":159,"Name":"Al mangaf","Name_Ar":"المنقف الفحيحيل","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":160,"Name":"Abo Futaira","Name_Ar":"ابو فطيره","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":161,"Name":"Al Subahiya","Name_Ar":"الصباحيه","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":162,"Name":"Sabah Al Ahmad","Name_Ar":"صباح الاحمد","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":163,"Name":"Aswaq Al Qurain","Name_Ar":"اسواق القرين","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":164,"Name":"Umm Al Hayman","Name_Ar":"ام الهيمان","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":165,"Name":"Hadyia","Name_Ar":"هديه","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":166,"Name":"Jaber Al Ali","Name_Ar":"جابر العلي","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":167,"Name":"Al Mahboula","Name_Ar":"المهبوله","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":168,"Name":"Al Ahmadi","Name_Ar":"الاحمدي","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":169,"Name":"Al Aqilah","Name_Ar":"العقيله","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":170,"Name":"Al Riqqa","Name_Ar":"الرقه","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":171,"Name":"Hawalli","Name_Ar":"حولي","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":172,"Name":"Abdullah Al Mubarak","Name_Ar":"عبدالله المبارك","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":173,"Name":"Ardiy","Name_Ar":"العارضيه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":174,"Name":"Ardiy industrial","Name_Ar":"العارضيه الصناعيه","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":175,"Name":"Al Dajeej","Name_Ar":"الضجيج","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":176,"Name":"Khaitan","Name_Ar":"خيطان","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":177,"Name":"Al Rai","Name_Ar":"الري","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":178,"Name":"Al Riggae","Name_Ar":"الرقعي","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":179,"Name":"Fahad Al-Ahmad","Name_Ar":"فهد الأحمد ","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":180,"Name":"Khairan","Name_Ar":"الخيران ","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":181,"Name":"West Abdullah Al-Mubarak","Name_Ar":"غرب عبدالله المبارك ","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":184,"Name":"Northwest Sulaibikhat","Name_Ar":"شمال غرب الصليبيخات","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":185,"Name":"Shuwaikh","Name_Ar":"الشويخ","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":190,"Name":"Al Nahda","Name_Ar":"النهضة","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":191,"Name":"Jibla","Name_Ar":"جبله","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":192,"Name":"AL Murgab","Name_Ar":"المرقاب","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":193,"Name":"Hattin","Name_Ar":"حطين","CreatedBy":0,"IsActive":true,"DriverId":5,"DeliveryCharge":"0.75"},{"Id":194,"Name":"Al Badae","Name_Ar":"البدع","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"},{"Id":195,"Name":"Abu Halifa","Name_Ar":"ابو حليفه","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":196,"Name":"Al Fahaheel","Name_Ar":"الفحيحيل","CreatedBy":0,"IsActive":true,"DriverId":4,"DeliveryCharge":"0.75"},{"Id":197,"Name":"Rawda","Name_Ar":"??????","CreatedBy":0,"IsActive":true,"DriverId":16,"DeliveryCharge":"0.75"}]');
+                        var loopCount = 0;
+                        $(cityList).each(function () {
+                            var option = $("<option />");
+                            //Set Customer Name in Text part.
+                            if (lang == "ar") {
+                                option.html(this.Name_Ar);
+                            }
+                            else {
+                                option.html(this.Name);
+                            }
+                            option.val(this.Id);
+                            option.attr('driverId', this.DriverId);
+                            option.attr('cityName', this.Name);
+                            option.attr('deliveryCharge', this.DeliveryCharge);
+                            if (this.Id == selectedId) {
+                                option.attr('selected', 'selected');
+                            }                            
+                            optCustCity.append(option);
+                            loopCount = loopCount + 1;
+                        });
+                //     },
+                //     failure: function (response) {
+                //         alert(response.responseText);
+                //         alert("Failure");
+                //     },
+                //     error: function (response) {
+                //         alert(response);
+                //         alert("Error");
+                //     }
+                // });
+
+            }
+            /*--------------------------------------------------------------------------------*/
+
+
+            /*---------------------------------------------------------------------------------------------------*/
+
+
+            $('#btnSave').click(function () {
+
+
+                var governorateId = $('#optGovernorate').find(":selected").val();
+                var governorateName = $('#optGovernorate').find(":selected").text();
+                var cityId = $('#optCustCity').find(":selected").val();
+                var cityName = $('#optCustCity').find(":selected").attr('cityName');
+                var driverId = $('#optCustCity').find(":selected").attr('driverId');
+                var deliveryCharge = $('#optCustCity').find(":selected").attr('deliveryCharge');
+
+
+
+                var validated = false;
+
+                if ($('#txtRCustName').val() == "") {
+                    toastr.error(getenar("Enter Name", lang));
+                    $('#txtRCustName').focus();
+                    return false;
+                }
+
+
+                if ($('#txtRCustMobile').val().length == 0) {
+                    toastr.error(getenar("Enter Mobile Number", lang));
+                    $('#txtRCustMobile').focus();
+                    return false;
+                }
+
+                if ($('#txtRCustMobile').val().length != 8) {
+                    toastr.error(getenar("Enter Valid Mobile Number", lang));
+                    $('#txtRCustMobile').focus();
+                    return false;
+                }
+
+                if (typeof ($(".delivery-place.active").attr("addresstype")) === "undefined") {
+                    toastr.error(getenar("Select Delivery Place", lang));
+                    return false;
+                }
+
+
+                if (governorateId == 0) {
+                    toastr.error(getenar("Select Governorate and City", lang));
+                    return false;
+                }
+
+                if ($('#txtRCustBlock').val().length == 0) {
+                    toastr.error(getenar("Enter Block", lang));
+                    $('#txtRCustBlock').focus();
+                    return false;
+                }
+
+                if ($('#txtRCustStreet').val().length == 0) {
+                    toastr.error(getenar("Enter street", lang));
+                    $('#txtRCustStreet').focus();
+                    return false;
+                }
+
+                if ($('#txtRCustBuilding').val().length == 0) {
+                    toastr.error(getenar("Enter Building", lang));
+                    $('#txtRCustBuilding').focus();
+                    return false;
+                }
+
+                var address4 = "";
+
+                if ($(".delivery-place.active").attr("addresstype") != "home") {
+
+                    if ($('#txtFloor').val().length == 0) {
+                        toastr.error(getenar("Enter Floor #", lang));
+                        $('#txtFloor').focus();
+                        return false;
+                    }
+
+                    if ($('#txtApartment').val().length == 0) {
+                        toastr.error(getenar("Enter Apartment #", lang));
+                        $('#txtApartment').focus();
+                        return false;
+                    }
+
+                    address4 = $('#txtApartment').val() + '~' + $('#txtFloor').val();
+                }
+
+                let isNew = "0";
+                let isToUpdate = "0";
+
+                if (customerExistingInfo != null) {
+                    if (customerExistingInfo.CityId == cityId
+                        && customerExistingInfo.Address1 == $('#txtRCustBlock').val()
+                        && customerExistingInfo.Address2 == $('#txtRCustStreet').val()
+                        && customerExistingInfo.Address3 == $('#txtRCustBuilding').val()
+                        && customerExistingInfo.Address4 == address4
+                        && customerExistingInfo.FullName == $('#txtRCustName').val()
+                        && customerExistingInfo.Mobile == $('#txtRCustMobile').val()
+                        && customerExistingInfo.Note == $('#txtRCustNote').val()
+                        && customerExistingInfo.Jarrah == $('#txtJarrah').val()
+                        && customerExistingInfo.AddressType == $(".delivery-place.active").attr("addresstype")) {
+                        isToUpdate = "0";
+                    }
+                    else {
+                        isToUpdate = "1";
+                    }
+                }
+                else {
+                    isNew = "1";
+                }
+                
+                var data = {
+                    "Id": $('#hdnCustomerId').val(), "FullName": $('#txtRCustName').val(),
+                    "Mobile": $('#txtRCustMobile').val(),
+                    "City": cityName,
+                    "CityId": cityId,
+                    "DriverId": driverId,
+                    "Address1": $('#txtRCustBlock').val(),
+                    "Address2": $('#txtRCustStreet').val(),
+                    "Address3": $('#txtRCustBuilding').val(),
+                    "Address4": address4,
+                    "SelectedItem": $('#hdnSelectedItem').val(),
+                    "AddressType": $(".delivery-place.active").attr("addresstype"),
+                    "SelectedProd": localStorage.getItem("selectedprodlist"),
+                    "Note": $('#txtRCustNote').val(),
+                    "Jarrah": $('#txtJarrah').val(),
+                    "DeliveryCharge": deliveryCharge,
+                    "Governorate": governorateName,
+                     "isNew": isNew,
+                    "isToUpdate": isToUpdate
+                };
+
+               localStorage.setItem("productsWithCustomer", JSON.stringify(data));
+                window.location.href = "../user/order.html";
+
+            });
+
+
+        });
+
+    </script>
+
+    <script>
+        // Page variables
+        var divLogin = $("#divLogin");
+        var divOrder = $("#divOrder");
+        var btnCustomerNext = $("#btnCustomerNext");
+        var isExistingCustomer = false;
+
+        // Pre-define function
+        function handleCustNextBtnState(disalbeState) {
+            btnCustomerNext.attr("disabled", disalbeState);
+        }
+        function bindCustomerDetail() {
+            var custDetail = getSessionCustomer();
+            if (custDetail) {
+                $("#lblCustName").text(custDetail.name);
+                $("#lblCustMobile").text(custDetail.mobile);
+                $("#lblCustAddress").text(custDetail.address);
+            }
+        }
+        function handleView(clickedAction) {
+            if (clickedAction == "login") {
+                divLogin.hide();
+                divOrder.hide();
+                divRegister.show("slow");
+            }
+            if (clickedAction == "register") {
+                // divRegister.hide();
+                divOrder.hide();
+                divLogin.show("slow");
+            }
+        }
+        function clearCustomerInfo() {
+            $("#txtCustMobile").val("");
+            $("#txtRCustName").val("");
+            $("#txtRCustMobile").val("");
+            $("#txtRCustCity").val("");
+            $("#txtRCustBlock").val("");
+            $("#txtRCustStreet").val("");
+            $("#txtRCustBuilding").val("");
+            sessionStorage.removeItem("customer");
+        }
+
+        // on init
+        clearCustomerInfo();
+    </script>
+
+    <script>
+        function handleCustomerLogin() {
+            var txtCustMobile = $("#txtCustMobile").val();
+
+            if (!txtCustMobile) {
+                alert("Please enter mobile number");
+                return false;
+            }
+
+            isExistingCustomer = false;
+            clearCustomerInfo();
+            var tempAppUsers = getAppUsers();
+
+            var cust = tempAppUsers.filter((item) => item.mobile == txtCustMobile);
+
+            if (cust.length == 0) {
+                alert("Customer not found.");
+                return false;
+            }
+
+            setSessionCustomer(cust[0]);
+
+            $("#txtRCustName").val(cust[0].name);
+            $("#txtRCustMobile").val(cust[0].mobile);
+            $("#txtRCustAddress").val(cust[0].address);
+            $("#txtRCustCity").val(cust[0].city);
+            $("#txtRCustBlock").val(cust[0].block);
+            $("#txtRCustStreet").val(cust[0].street);
+            $("#txtRCustBuilding").val(cust[0].building);
+
+            isExistingCustomer = true;
+        }
+        function handleCustomerNext() {
+            if (isExistingCustomer) {
+                window.location.href = "/user/order";
+                return true;
+            }
+
+            var txtRCustName = $("#txtRCustName").val();
+            var txtRCustMobile = $("#txtRCustMobile").val();
+            // var txtRCustAddress = $("#txtRCustAddress").val();
+            var txtRCustCity = $('#optCustCity').val();
+            var txtRCustBlock = $("#txtRCustBlock").val();
+            var txtRCustStreet = $("#txtRCustStreet").val();
+            var txtRCustBuilding = $("#txtRCustBuilding").val();
+
+            if (!txtRCustName) {
+                alert("Please enter the name");
+                return false;
+            }
+            if (!txtRCustMobile) {
+                alert("Please enter the mobile number");
+                return false;
+            }
+            if (!txtRCustCity) {
+                alert("Please select the city");
+                return false;
+            }
+            if (!txtRCustBlock) {
+                alert("Please enter the block");
+                return false;
+            }
+            if (!txtRCustStreet) {
+                alert("Please enter the street");
+                return false;
+            }
+            if (!txtRCustBuilding) {
+                alert("Please enter the building");
+                return false;
+            }
+
+
+            setSessionCustomer({
+                name: txtRCustName,
+                mobile: txtRCustMobile,
+                city: txtRCustCity,
+                block: txtRCustBlock,
+                street: txtRCustStreet,
+                building: txtRCustBuilding
+            });
+
+            //window.location.href = "/user/order";
+        }
+    </script>
+
+
+</head>
+
+<body>
+
+
+    <!-- Page Loader starts -->
+    <div class="page-loader-wrapper" style="display: none;">
+        <div class="d-flex justify-content-center align-items-center position-absolute w-100" style="height: 100vh;
+    background: rgba(0,0,0,0.6); z-index: 99999;">
+            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <!-- Page Loader End -->
+
+    <input type="hidden" id="hdnCustomerId" />
+    <nav class="bg-app-yg fixed-top px-1 px-md-3 shadow-lg">
+        <div class="row">
+            <div class="col-4 my-auto">
+                <div class="text-start fs-5 my-auto">
+                    <span class="bg-opacity-50 bg-secondary p-1 rounded shadow btn fw-bold" onclick="swithLang()">
+                        <span class="px-2" data-lang="lblLanguage">عربي</span>
+                    </span>
+                    <a class="mx-3 mx-md-5 text-white" href="../index.html.br" data-lang="lblProducts" id="lblcustomer"> Products</a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-center my-auto">
+                    <a href="../index.html.br">
+                        <img src="../Content/general/img/main-logo.png" height="70" alt="" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 my-auto">
+                <div class="my-auto">
+                    <button class="btn btn-light btn-sm d-none">Login</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="page-content-section">
+        <div class="text-center page-header frozen d-none">
+            <div class="overlay h-100 w-100">
+                <div class="title">
+                    <h1>Frozen Products</h1>h
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content container py-5">
+
+            <div id="divLogin">
+                <h2 class="my-4 text-app-blue-light" id="h2entermobile"></h2>
+
+                <div class="row">
+                    <div class="col-12">
+                        <small id="lblcontinueorder"></small>
+                    </div>
+                    <div class="col-12 col-md-4 mt-1">
+                        <input type="text" id="txtCustMobile" class="form-control" pattern="\d*" maxlength="8" />
+                    </div>
+                    <div class="col-3 col-md-2 mt-1">
+                        <input type="button" class="btn btn-primary" id="btnSearch" value="" />
+                    </div>
+                </div>
+            </div>
+
+             
+            <div id="divRegister">
+                <h2 class="mt-5 text-app-blue-light" id="h2customerinfo"></h2>
+                <div>
+                    <small class="text-secondary" id="lblifnew"></small>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+
+                        <div class="form-group my-2">
+                            <label id="lbldeliveryplace"></label>
+                            <input type="hidden"
+                                   id="txtRCustDeliveryPlace"
+                                   value="building"
+                                   class="form-control" />
+                            <div class="d-flex">
+                                <div id="dp-building"
+                                     class="position-relative delivery-place me-2 apartment" addresstype="apartment">
+                                    <span>
+                                        <i class="fa fa-check-circle status"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-4x fa-building icon"></i>
+                                    </span>
+                                </div>
+                                <div id="dp-home" class="position-relative delivery-place me-2 home" addresstype="home">
+                                    <span>
+                                        <i class="fa fa-check-circle status"></i>
+                                    </span>
+                                    <span><i class="fa fa-4x fa-home icon"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group my-2">
+                            <label id="lblfullname"></label>
+                            <input type="text" id="txtRCustName" class="form-control" />
+                        </div>
+                        <div class="form-group my-2">
+                            <label id="lblmobilenumber"></label>
+                            <input type="number" id="txtRCustMobile" class="form-control" />
+                        </div>
+
+                        <div class="form-group my-2">
+                            <label id="lblGovernorate"></label>
+                            <select id="optGovernorate" class="form-control">
+                            </select>
+                        </div>
+
+                        <div class="form-group my-2">
+                            <label id="lblcity"></label>
+                            <select id="optCustCity" class="form-control">
+                            </select>
+                        </div>
+
+                        <div class="form-group my-2">
+                            <label id="lblblock"></label>
+                            <input type="text" id="txtRCustBlock" class="form-control" />
+                        </div>
+
+                        <div class="form-group my-2">
+                            <label id="lblstreet">Street</label>
+                            <input type="text" id="txtRCustStreet" class="form-control" />
+                        </div>
+                        <div id="divtxtRCustBuilding" class="form-group my-2">
+                            <label id="lblbuildingno"></label>
+                            <input type="text"
+                                   id="txtRCustBuilding"
+                                   class="form-control" />
+                        </div>
+
+                        <div id="divtxtFloor" class="form-group my-2">
+                            <label id="lblFloorno"></label>
+                            <input type="text"
+                                   id="txtFloor"
+                                   class="form-control" />
+                        </div>
+
+                        <div id="divtxtApartment" class="form-group my-2">
+                            <label id="lblapartment"></label>
+                            <input type="text"
+                                   id="txtApartment"
+                                   class="form-control" />
+                        </div>
+
+                        <div class="form-group my-2">
+                            <label id="lblJarrah">                                
+                            </label>
+                            <input type="text"
+                                   id="txtJarrah"
+                                   class="form-control" />
+                        </div>
+
+                        <div class="form-group my-2">
+                            <label id="lblnote"></label>
+                            <textarea class="form-control" id="txtRCustNote" rows="3"></textarea>
+                        </div>
+
+
+                        <div>
+                            <button id="btnSave"
+                                    class="btn btn-primary w-100">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div id="divOrder" class="d-none">
+                <div class="border p-2 rounded shadow-sm">
+                    <h2 class="my-4 text-app-blue-light">Customer Detail</h2>
+
+                    <div class="g-2 g-md-5 row">
+                        <div class="col-6">
+                            <label>Customer Name</label>
+                            <p><strong id="lblCustName">Mohamed Salihu</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <label>Mobile #</label>
+                            <p><strong id="lblCustMobile">67752065</strong></p>
+                        </div>
+                        <div class="col-12">
+                            <label>Address</label>
+                            <p><strong id="lblCustAddress">Farwaniya, Kuwait</strong></p>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-secondary btn-sm"
+                                    onclick="handleCustomerReset()">
+                                <i class="bi bi-arrow-clockwise mx-1"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>-->
+            <!-- <hr /> -->
+            <!--<h2 class="my-5 pt-4 text-app-blue-light">Order Detail</h2>
+            <div class="order-items"></div>-->
+            <!-- <div id="divOrderSummary" class="order-summary"></div> -->
+            <!--<hr />
+                <div class="my-5">
+                    <a href="/" class="btn btn-secondary btn-sm">
+                        <i class="mx-1 bi bi-arrow-left"></i> Back
+                    </a>
+                </div>
+            </div>-->
+        </div>
+    </section>
+
+
+
+</body>
+</html>
