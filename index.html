@@ -5,13 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>KUPCO</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/fav/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/fav/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/fav/favicon-16x16.png" />    
-    <link href="https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/fav/site.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/fav/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/fav/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/fav/favicon-16x16.png" />    
+    <link href="https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/fav/site.webmanifest" />
     <link rel="stylesheet" href="/" id="linkBootstrap">
     
-    <script src="https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/js/lang.js"></script>
+    <script>
+                const en = {
+          lblLanguage: "ع",
+          lblProducts: "Products",
+        };
+
+        const ar = {
+          lblLanguage: "E",
+          lblProducts: "منتجات",
+        };
+
+        const appLang = {
+          en: { ...en },
+          ar: { ...ar },
+        };
+
+        
+    </script>
     <style>
         @charset "UTF-8";/*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
@@ -26,7 +43,7 @@
     <style>
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700;900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,700&display=swap');
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-ficons@1.10.3/font/bootstrap-icons.css");
 @import url('https://fonts.googleapis.com/css2?family=Mirza:wght@400;500;600;700&display=swap');
 /* Basic css */
 :root {
@@ -38,14 +55,14 @@
 
 @font-face {
     font-family: "janna";
-    src: url('https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/fonts/janna/Janna-LT-Bold.ttf') format("truetype");
+    src: url('https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/fonts/janna/Janna-LT-Bold.ttf') format("truetype");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: "janna";
-    src: url('https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/fonts/janna/Janna-LT-Regular.ttf') format("truetype");
+    src: url('https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/fonts/janna/Janna-LT-Regular.ttf') format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -174,19 +191,19 @@ a {
     }
 
     .cat.fresh {
-        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/img/cat/fresh.jpg);
+        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/img/cat/fresh.jpg);
     }
 
     .cat.frozen {
-        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/img/cat/frozen.jpg);
+        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/img/cat/frozen.jpg);
     }
 
     .cat.egg {
-        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/img/cat/egg-1.jpg);
+        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/img/cat/egg-1.jpg);
     }
 
     .cat.bucket {
-        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/img/cat/bucket.jpg);
+        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/img/cat/bucket.jpg);
     }
 
 /* External Page */
@@ -237,15 +254,15 @@ a {
         }
 
     .page-header.fresh {
-        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/img/cat/fresh.jpg);
+        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/img/cat/fresh.jpg);
     }
 
     .page-header.frozen {
-        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/img/cat/frozen.jpg);
+        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/img/cat/frozen.jpg);
     }
 
     .page-header.egg {
-        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/img/cat/egg-1.jpg);
+        background-image: url(https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/img/cat/egg-1.jpg);
     }
 
 .page-content {
@@ -356,9 +373,170 @@ button {
         }
     </style>
 
-    <script src="https://raw.githubusercontent.com/mxr991/kupaco/v10/content/assets/js/jquery-3.6.3.min.js"></script>
+    <script src="https://raw.githubusercontent.com/mxr991/kupaco/v12/content/assets/js/jquery-3.6.3.min.js"></script>
 
-    <script src="https://raw.githubusercontent.com/mxr991/kupaco/v10/Scripts/en_ar_mapping.js?v=4.1"></script>
+    <script>
+
+
+var enardata = {   
+    "success": "تم بنجاح",
+    "delivery": "التوصيل",
+    "scheduled": "وقت التوصيل",
+    "2pm - 5pm": "2 م - 5 م",
+    "pending": "قيد الانتظار",
+    "8am - 2pm": "8 ص - 2 م",
+    "cashondelivery": "الدفع عند الاستلام",
+    "cancel": "الغاء",
+    "accepted": "طلب مقبول",
+    "cash": "كاش",
+    "no orders found": "لم يتم أي طلب",
+    "completed": "مكتمل",
+    "delivery address": "عنوان التسليم",
+    "delivery date": "تاريخ التسليم ",
+    "contact info": "معلومات الاتصال",
+    "items": "السلع",
+    "total": "المجموع",
+    "cancelled": "ملغي",
+    "update": "تحديث",
+    "enter first name": "أدخل الاسم الاول",
+    "enter last name": "ادخل الاسم الاخير",
+    "enter username": "ادخل اسم المستخدم",
+    "enter password": "أدخل كلمة المرور",
+    "password is not matching": "كلمة المرور غير متطابقة",
+    "select usertype": "حدد نوع المستخدم",
+    "name": "اسم",
+    "total order": "اجمالي الطلبات ",
+    "sub total": "المجموع",
+    "discount": "تخفيض",
+    "net amount": "قيمة الدخل",
+    "pages": "الصفحات",
+    "dashboard": "صفحة التحكم",
+    "order": "طلب",
+    "user": "مستخدم",
+    "users": "المستخدمين",
+    "report": "التقارير",
+    "sales report": "تقرير المبيعات",
+    "customer": "عميل",
+    "customers": "عملاء",
+    "voucher": "الخصم",
+    "vouchers": "الخصومات",
+    "products": "المنتجات",
+    "slaughter": "المسلخ",
+    "create": "انشاء",
+    "confirm": "تاكيد",
+    "net total": "اجمالي الدخل",
+    "frozen": "المجمد",
+    "fresh": "الطازج",
+    "fresh eggs": "البيض الطازج",
+    "pick your need": "المنتجات الامثل مع المتحدة ",
+    "kuwait united poultry company": "الشركة الكويتية المتحدة للدواجن ",
+    "choose your products": "اختر منتجاتك",
+    "frozen products": "المنتجات المجمدة",
+    "fresh products": "منتجات الطازجة",
+    "enter mobile #": "ادخل رقم الهاتف",
+    "enter your mobile number to continue the order": "أدخل رقم هاتفك لمتابعة الطلب",
+    "customer info": "معلومات العميل",
+    "if new, please fill below detail and continue next": "إذا كانت هذه التجربه الاولى معنا ، يرجى تعبئه البيانات التاليه للمتابعه",
+    "fullname": "الاسم الكامل",
+    "mobile #": " رقم الهاتف",
+    "city": "المدينة",
+    "block": "قطعه ",
+    "street": "شارع",
+    "building no #": "رقم المبنى",
+    "note": "ملاحظات",
+    "next": "التالي",
+    "delivery place": "العنوان",
+    "search": "بحث",
+    "customer detail": "معلومات العميل",
+    "customer name": "اسم  العميل",
+    "address": "العنوان",
+    "order detail": "تفاصيل الطلب",
+    "coupen code": "رمز الكوبون",
+    "delivery scheduled": "وقت الاستلام",
+    "payment type": "نوع الدفع ",
+    "confirm and pay": "التاكيد و الدفع",
+    "cash on delivery": "الدفع عند الاستلام",
+    "apply": "اضافه",
+    "order confirm": "تاكيد الطلب",
+    "back": "خلف",
+    "checkout": "الدفع",
+    "knet": "كي نت",
+    "select product": " اختر منتج",
+    "enter mobile number": "ادخل رقم الهاتف",
+    "enter valid mobile number": "ادخل ىقم هاتف صحيح",
+    "not exist": "لا يوجد بيانات على هذا الرقم",
+    "enter name": "ادخل اسم المستخدم",
+    "select address type": "ادخل نوع السكن",
+    "enter block": "ادخل رقم القطعه",
+    "enter street": "ادخل رقم الشارع",
+    "enter building": "ادخل رقم المبنى",
+    "select delivery place": "اختر نوع السكن",
+    "enter apartment #": "ادخل رقم الشقه",
+    "enter floor #": "اخل رقم الدور",
+    "enter coupon code": "ادخل كود الخصم",
+    "invalid coupen": " كود الخصم غير فعال",
+    "order created successfuly. your order #": " تم تنفيذ الطلب بنجاح, رقم طلبك ",
+    "login": "تسجيل الدخول ",
+    "governorate": "المحافظة",
+    "avenue": "رقم الجادة",
+    "floor #": "رقم الدور",
+    "apartment #": "رقم الشقه",
+    "order less than 10 kd will not be delivered": "لا يمكن اتمام الطلبات اقل من 10 KD",
+    "status": "الحالة",
+    "failed": "فشل",
+    "initiated": "ابدأ",
+    "delivery charge": "تكلفة التوصيل",
+    "product": "منتج",
+    "product list": "قائمة المنتجات",
+    "administration": "إدارة",
+    "orderinfo": "بيانات الطلب",
+    "schedule": "وقت التوصيل",
+    "order for delivery not found": " Order For Delivery Not Found AR",
+    "pickup": "Pickup AR",
+    "complete": "مكتمل",
+    "order info": "بيانات الطلب",
+    "invoice reminder sent": "تم إرسال رابط الدفع بنجاح",
+    "send payment link": "إرسال رابط الدفع",
+    "driver cash": "سائق كاش",
+    "please enter the name": " يرجى كتابة الاسم ",
+    "please enter the address": "يرجى كتابة العنوان ",
+    "please enter the username": " يرجى كتابة اسم المستخدم ",
+    "please enter the password": " يرجى كتابة الرقم السري  ",
+    "please select the city": " يرجى اختيار المنطقة",
+    "please enter the block": " يرجى كتابة رقم القطعة",
+    "please enter the street": " يرجى كتابة رقم الشارع",
+    "please enter the building": " يرجى ادخال رقم المبنى",
+    "order creation in process": "الطلب قيد الانشاء",
+    "order created successfully. your order #": "تم انشاء الطلب بنجاح. رقم الطلب #",
+    "invalid coupon": "الكوبون غير صحيح",
+    "order less than 10 kd will not be delivered": "لن يتم تنفيذ أي طلب اقل من 10 دنانير",
+    "offer start date": "تاريخ بداية الخصم",
+    "offer end date": "تاريخ نهاية الخصم",
+    "enter value or percent": "يرجى ادخال نسبة او قيمة",
+    "order created by customer":"الطلب المنشأ عن طريق الزبون"
+};
+
+function getenar(a, b) {
+
+    if (b == null)
+        b = "en";
+
+        if (b.toLowerCase() != "en") {
+            var c = (a).toLowerCase();
+            var d = enardata[c];
+
+            if (d != null && d.length > 0) {
+                return d;
+            }
+            return a;
+        }
+
+        return a;
+    
+   
+}
+
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -405,7 +583,7 @@ button {
             </div>
         </div>
         <div class="logo text-center">
-            <img src="https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/img/big-logo.png" alt="" />
+            <img src="https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/img/big-logo.png" alt="" />
         </div>
         <div class="wave">
             <!-- <img src="general/img/wavesNegative.svg" alt="" /> -->
@@ -474,7 +652,146 @@ button {
             </div>
         </div>
     </section>
-    <script src="https://raw.githubusercontent.com/mxr991/kupaco/v10/Content/general/js/site.js?v=4.1"></script>
+    <script>
+        function setPreferredLang(lang) {
+
+    delete_cookie("lang");
+    set_cookie("lang", lang);
+    localStorage.removeItem("lang");
+    localStorage.setItem("lang", lang);
+}
+function getPreferredLang() {
+    return localStorage.getItem("lang") ?  localStorage.getItem("lang") : "ar";
+}
+
+
+function delete_cookie(name) {
+    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+function set_cookie(name, value) {
+    document.cookie = name + '=' + value + '; Path=/;';
+}
+
+function handleLang() {
+    const html = document.querySelector("html");
+    const selLang = getPreferredLang() ? getPreferredLang() : "en";
+
+    if (selLang == "ar") {
+        // if (document.getElementById("css-ltr")) {
+        // Do process for the AR screen
+        if (document.getElementById("css-ltr"))
+            document
+                .getElementsByTagName("head")[0]
+                .removeChild(document.getElementById("css-ltr"));
+        html.setAttribute("lang", "ar");
+        html.setAttribute("dir", "rtl");
+        loadExtranalfile("css-rtl", "bootstrap.rtl.min.css", "css");
+    } else {
+        // } else if (document.getElementById("css-rtl")) {
+        // Do process for the EN screen
+        if (document.getElementById("css-rtl"))
+            document
+                .getElementsByTagName("head")[0]
+                .removeChild(document.getElementById("css-rtl"));
+        html.setAttribute("lang", "en");
+        html.setAttribute("dir", "ltr");
+        loadExtranalfile("css-ltr", "bootstrap.min.css", "css");
+    }
+
+    // Reset the language
+    $("[data-lang]").each((i, el) => {
+        let text = appLang[selLang][$(el).data("lang")];
+        if (el.tagName == "INPUT") {
+            $(el).attr("placeholder", text);
+        } else $(el).text(text);
+    });
+}
+
+// Init
+handleLang();
+
+function swithLang() {
+    if (getPreferredLang() && getPreferredLang() == "ar") setPreferredLang("en");
+    else setPreferredLang("ar");
+
+    location.reload();
+}
+
+function loadExtranalfile(id, fileName, fileType) {
+    fileName = "https://raw.githubusercontent.com/mxr991/kupaco/v12/Content/general/css/" + fileName;
+    if (fileType == "js") {
+        //if filename is a external JavaScript file
+        var fileref = document.createElement("script");
+        fileref.setAttribute("type", "text/javascript");
+        fileref.setAttribute("src", fileName);
+    } else if (fileType == "css") {
+        //if filename is an external CSS file
+        var fileref = document.createElement("link");
+        fileref.setAttribute("rel", "stylesheet");
+        fileref.setAttribute("type", "text/css");
+        fileref.setAttribute("href", fileName);
+    }
+    if (typeof fileref != "undefined") {
+        fileref.setAttribute("id", id);
+        document.getElementById("linkBootstrap").after(fileref);
+        // document.getElementsByTagName("head")[0].appendChild(fileref);
+    }
+}
+
+// Product js
+
+var orderList = [];
+
+function handleItemSelection(itemId, cat) {
+    var selItem = $("#" + itemId);
+
+    if (selItem) {
+        if (selItem.hasClass("active")) {
+            selItem.removeClass("active");
+            orderList = orderList.filter((li) => li.id != itemId);
+        } else {
+            selItem.addClass("active");
+
+            var product =
+                cat == "fz" ? frozenItems : cat == "fs" ? freshItems : eggItems;
+
+            orderList.push(product.filter((li) => li.id == itemId)[0]);
+        }
+    }
+    setSessionOrder();
+}
+
+function handleItemCount(itemId, action) {
+    // action = inc | dec
+    var countLbl = $("#" + itemId + " " + ".count");
+    if (action == "inc") countLbl.text(Number(countLbl.text()) + 1);
+    if (action == "dec" && Number(countLbl.text()) != 1)
+        countLbl.text(Number(countLbl.text()) - 1);
+
+    orderList.forEach((item) => {
+        if (item.id == itemId) {
+            item.count = Number(countLbl.text());
+        }
+    });
+    setSessionOrder();
+}
+
+function setSessionOrder() {
+    sessionStorage.removeItem("orderList");
+    sessionStorage.setItem("orderList", JSON.stringify(orderList));
+}
+
+function setSessionCustomer(custObject) {
+    sessionStorage.removeItem("customer");
+    sessionStorage.setItem("customer", JSON.stringify(custObject));
+}
+function getSessionCustomer() {
+    var cust = sessionStorage.getItem("customer");
+    if (cust) return JSON.parse(cust);
+    else return null;
+}
+
+    </script>
 
 </body>
 </html>
